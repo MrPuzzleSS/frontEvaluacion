@@ -96,7 +96,7 @@ const editar = (estudiante) => {
           Swal.fire(data.msg, 'El estudiante se registro correctamente!', 'success');
   
           setTimeout(() => {
-            window.location.href = '/FrontedEstudiante/listarEstudiante.html';
+            window.location.href = '/listarEstudiante.html';
           }, 3000);
         } else {
           // Mostrar mensaje de error
