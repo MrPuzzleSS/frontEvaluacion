@@ -20,6 +20,7 @@ const listarDatos = async () => {
             `<td>${estudiante.nota2}</td>` +
             `<td>${estudiante.nota3}</td>` +
             `<td>${estudiante.promedio}</td>` +
+            `<td>${estudiante.observacion}</td>` +
             `<td><a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick='editar(${JSON.stringify(estudiante)})' >Editar</a> 
             <a class="waves-effect waves-light btn modal-danger red"  onclick='eliminar(${JSON.stringify(estudiante)})'>Eliminar</a></td>` +
             `</tr>`
@@ -35,12 +36,14 @@ const editar = (estudiante) => {
     document.getElementById('nota1').value = ''
     document.getElementById('nota2').value = ''
     document.getElementById('nota3').value = ''
+    document.getElementById('observacion').value = ''
   
     document.getElementById('documento').value = estudiante.documento
     document.getElementById('nombre').value = estudiante.nombre
     document.getElementById('nota1').value = estudiante.nota1
     document.getElementById('nota2').value = estudiante.nota2
     document.getElementById('nota3').value = estudiante.nota3
+    document.getElementById('observacion').value = estudiante.observacion
   
   }
 
@@ -73,6 +76,7 @@ const editar = (estudiante) => {
     let _nota1 = document.getElementById('nota1').value 
     let _nota2 = document.getElementById('nota2').value 
     let _nota3 = document.getElementById('nota3').value 
+    let _observacion = document.getElementById('observacion').value 
     const url = 'https://evaluacionapi.onrender.com/api/estudiante';
   
       let estudiante = {
@@ -80,7 +84,8 @@ const editar = (estudiante) => {
         nombre: _nombre,
         nota1: _nota1,
         nota2: _nota2,
-        nota3:_nota3
+        nota3:_nota3,
+        observacion:_observacion
       }
   
       const response = await fetch(url, {
@@ -89,7 +94,7 @@ const editar = (estudiante) => {
         body: JSON.stringify(estudiante),
         headers: { "Content-type": "application/json; charset=UTF-8" }
       });
-      if ((_documento !== '') && (_nombre !== '') && (_nota1 !== '') && (_nota2 !== '') && (_nota3 !== '')){
+      if ((_documento !== '') && (_nombre !== '') && (_nota1 !== '') && (_nota2 !== '') && (_nota3 !== '') && (_observacion !== ''){
         if (response.ok) {
           const data = await response.json();
           // Mostrar mensaje de éxito
@@ -144,6 +149,12 @@ const editar = (estudiante) => {
         }else{
           document.getElementById("mensajeNota3").innerHTML = '';
         }
+
+        if (_observacion === ''){
+          document.getElementById("mensajeObservacion").innerHTML = '<div class="alert alert-danger" role="alert">Ingrese la observacion</div>';
+        }else{
+          document.getElementById("mensajeObservacion").innerHTML = '';
+        }
       }
       }
       // Verificar el estado de la respuesta
@@ -155,6 +166,7 @@ const editar = (estudiante) => {
     let _nota1 = document.getElementById('nota1').value 
     let _nota2 = document.getElementById('nota2').value 
     let _nota3 = document.getElementById('nota3').value 
+    let _observacion = document.getElementById('observacion').value 
     const url = 'https://evaluacionapi.onrender.com/api/estudiante';
   
     let estudiante = {
@@ -162,7 +174,8 @@ const editar = (estudiante) => {
         nombre: _nombre,
         nota1: _nota1,
         nota2: _nota2,
-        nota3:_nota3
+        nota3:_nota3,
+        observacion:_observacion
       }
   
       const response = await fetch(url, {
@@ -171,7 +184,7 @@ const editar = (estudiante) => {
         body: JSON.stringify(estudiante),
         headers: { "Content-type": "application/json; charset=UTF-8" }
       });
-      if ((_documento !== '') && (_nombre !== '') && (_nota1 !== '') && (_nota2 !== '') && (_nota3 !== '')){
+      if ((_documento !== '') && (_nombre !== '') && (_nota1 !== '') && (_nota2 !== '') && (_nota3 !== '') && (_observacion !== '')){
         if (response.ok) {
           const data = await response.json();
           // Mostrar mensaje de éxito
@@ -225,6 +238,12 @@ const editar = (estudiante) => {
 
         }else{
           document.getElementById("mensajeNota3").innerHTML = '';
+        }
+
+        if (_observacion === ''){
+          document.getElementById("mensajeObservacion").innerHTML = '<div class="alert alert-danger" role="alert">Ingrese la observacion</div>';
+        }else{
+          document.getElementById("mensajeObservacion").innerHTML = '';
         }
       }
     } 
